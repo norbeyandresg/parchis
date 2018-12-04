@@ -27,9 +27,7 @@ public class diceController : MonoBehaviour {
 		if (!GameControl.gameOver && coroutineAllowed) {
 			scriptOne.action();
 			scriptTwo.action();
-			for (int i = 0; i<1000000; i++) {
-				h+=i;
-			}
+			
 			Debug.Log(diceOneThrown + diceTwoThrown);
 			GameControl.diceSideThrown = diceOneThrown + diceTwoThrown;
 

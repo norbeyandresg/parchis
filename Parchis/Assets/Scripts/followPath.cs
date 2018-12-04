@@ -15,11 +15,12 @@ public class followPath : MonoBehaviour {
 
 	public int steps = 0;
 
-	public int player = -1;
+	public int player = 0;
 
 	public int tockenId = 0;
 
 	public bool moveAllowed = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,7 @@ public class followPath : MonoBehaviour {
 		if (player == 1 ){
 			pos = waypoints[waypointIndex].GetComponent<cellBox>().getPos();
 			transform.position = new Vector3((float)pos[0], 0.6f, (float)pos[1]) ;
-		} else {
+		} else if (player == 2) {
 			pos = waypoints[waypointIndex].GetComponent<cellBox>().getPos();
 			transform.position = new Vector3((float)pos[0], 0.6f, (float)pos[1]) ;
 		}
@@ -40,12 +41,22 @@ public class followPath : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (moveAllowed){
-				Move(player);
+				StartCoroutine("WaitForInstruction");
 		}
 	}
 
+	private IEnumerator WaitForInstruction() {
+		while (true) {
+			if(Input.GetMouseButtonDown(0) && GameControl.playerTurn == player) {
+				Move();
+				yield return new WaitForSeconds(1f);
+				yield break;
+			}
+			yield return null;
+		}
+	}
 
-	private void Move(int i) {
+	private void Move() {
 		cellBox cell = waypoints[waypointIndex].GetComponent<cellBox>();
 		pos = cell.getPos();
 		if (waypointIndex == waypoints.Length-1) { waypointIndex = 0; }
@@ -55,7 +66,7 @@ public class followPath : MonoBehaviour {
 			moveSpeed * Time.deltaTime);
 
 			if (transform.position == new Vector3((float)pos[0], 0.6f, (float)pos[1])){
-				if (cell.skyId == i ){
+				if (cell.skyId == player ){
 					if (waypoints[waypointIndex+1].GetComponent<cellBox>().skyId == 0){
 						waypointIndex += 0;
 					} else {
