@@ -41,7 +41,8 @@ public class followPath : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (moveAllowed){
-				StartCoroutine("WaitForInstruction");
+			//StartCoroutine("WaitForInstruction");
+			Move();
 		}
 	}
 

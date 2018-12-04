@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\DiceTwo.cs" />
      <Compile Include="Assets\Scripts\followPath.cs" />
      <Compile Include="Assets\Scripts\GameControl.cs" />
+     <Compile Include="Assets\Scripts\GameMaster.cs" />
      <Compile Include="Assets\Scripts\initPlayers.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
